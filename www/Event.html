@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="jquery.mobile-1.1.0.css" />
+<script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>
+<script type="text/javascript" src="jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="jquery.mobile-1.1.0.js"></script>
+<script type="text/javascript" src="function.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+                      appendEvent();
+                      });
+    function appendEvent(){
+        var cur = window.localStorage.getItem("curUser");
+        var events = window.localStorage.getItem(cur);
+        if(events==null)
+        {
+            blankEvent();
+        }else{
+            writeEvents(events);
+        }
+    }
+    function blankEvent(){
+        var eventMaterail = "<li><a href='addEvent.html'><img src='images/shapa.png'/> <h3> Blank Event1</h3><p>Press to start</p></a><a href='eventEdit.html' data-transition='slideup'>Edit</a></li>"
+        $("#eventList").append(eventMaterail);
+        $("#eventList").listview('refresh');
+    }
+    function writeEvents(events){
+        var eventlist= events.split(",");
+        var i;
+        for(i=0;i<eventlist.length;i++)
+        {
+            var event = strToEve(eventlist[i]);
+            if(event.name!="blank")
+            {
+                var eventInfo = "<li><a href='addEvent.html'><img src='images/shapa.png'/> <h3>"+event.name+"</h3><p>Start Time:"+event.time+"</p></a><a href='eventEdit.html' data-transition='slideup'>Edit</a></li>"
+                $("#eventList").append(eventInfo);
+                $("#eventList").listview('refresh');
+                
+            }
+
+        }
+    }
+</script>
+<title>Event</title>
+</head>
+<body>
+<div data-role="page">
+	<div data-role = "header">
+        <!--<a href = "addEvent.html" data-icon="plus" dataiconpos ="notext" data-rel="dialog" data-transition="fade">Add Event1</a>-->
+    	<h1>Event</h1>
+        <a href = "addEvent.html" data-icon="plus" dataiconpos ="notext" data-transition="fade">Add Event</a>
+    </div>
+    <div data-role= "content">
+        <ul data-role="listview" data-split-icon="gear" data-split-theme="b" id="eventList">
+        </ul>
+    </div>
+    <div data-role = "footer" data-id="fool" data-position="fixed">
+    	<div data-role="navbar" >
+            <ul>
+                <li><a href="Contact.html">Contact Us</a></li>
+                <li><a href="info.html">Info</a></li>
+                <li><a href="Event.html" data-transition="slideup" class="ui-btn-active ui-state-persist">Event</a></li>
+                <li><a href="Template.html">Template</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

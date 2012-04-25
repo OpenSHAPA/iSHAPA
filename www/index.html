@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="jquery.mobile-1.1.0.css" />
+    <title>PhoneGap1</title>
+	  <script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>
+      <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
+      <script type="text/javascript" src="jquery.mobile-1.1.0.js"></script>
+    <script type="text/javascript" src="function.js" ></script>
+       <script type="text/javascript">
+           function clear(){
+               $("#basic").val("");
+           }
+           
+            function initial(username){
+                if(username=="")
+                {
+                    alert("no username1");
+                }else{
+                    
+                    var name = window.localStorage.getItem("user");
+                    if(name==null)
+                    {
+                        name = username;
+                        window.localStorage.setItem("user",name);
+                    }
+                    else{
+                        name = name+","+username;
+                        window.localStorage.setItem("user",name);
+                    }
+                    window.localStorage.setItem("curUser",username);
+                    location.href="Event.html";
+                }
+            }
+           function reset(){
+               window.localStorage.clear();
+               clear();
+           }
+           function ini(){
+               document.addEventListener("deviceready",clear,true);
+           }
+           function test(){
+               location.href="Event.html";
+           }
+           
+            </script>
+  </head>
+    <body onload="ini();">
+  <div data-role="page">
+
+	<div data-role="header">
+		<h1>iSHAPA</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+        <h2>Welcome to iSHAPA</h2>
+        <p>This is an app to support openSHAPA to collect data for observational encoding</p>
+        <p>please enter your name to start: </p>
+        <p><label for="basic">username: </label>
+            <input type="text" name="name" id ="basic" value="" />
+            <a href="#" data-role="button" data-theme="b" onclick="initial($('#basic').val())"> Start </a>
+            <a href="Exuser_choose.html" data-role="button" data-theme="b">Existing User</a>
+            <a href="#" data-role="button" data-theme="b" onclick="reset();"> Reset </a>
+        </p>
+	</div><!-- /content -->
+    <div data-role="footer" data-id="fool" data-position="fixed">
+    	<div data-role="navbar">
+        	<ul>
+            	<li><a href="Contact.html">Contact Us</a></li>
+                <li><a href="info.html">Info</a></li>
+                <!--<li><a href="Event.html">Event</a></li>-->
+            </ul>
+        </div>
+    </div><!-- /footer -->
+    
+    
+</div><!-- /page -->
+      
+  </body>
+</html>
